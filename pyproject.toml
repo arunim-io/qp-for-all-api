@@ -1,0 +1,19 @@
+[tool.poetry]
+authors     = ["Mugdha Arunim Ahmed <mugdhaarunimahmed2017@gmail.com>"]
+description = ""
+name        = "backend"
+readme      = "README.md"
+version     = "0.1.0"
+
+  [tool.poetry.dependencies]
+  django          = "^4.1.2"
+  django-ninja    = "^0.19.1"
+  python          = "^3.7"
+  python-decouple = "^3.6"
+
+  [tool.poetry.group.dev.dependencies]
+  black = "^22.10.0"
+
+[build-system]
+build-backend = "poetry.core.masonry.api"
+requires      = ["poetry-core"]
