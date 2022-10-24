@@ -1,5 +1,10 @@
 {
+	"python.analysis.autoImportCompletions": true,
+	"python.analysis.autoSearchPaths": true,
+	"python.analysis.diagnosticMode": "workspace",
 	"python.analysis.importFormat": "relative",
+	"python.analysis.indexing": true,
+	// "python.analysis.useLibraryCodeForTypes": true,
 	"python.analysis.typeCheckingMode": "basic",
 	"python.formatting.provider": "black"
 }

@@ -1,8 +1,7 @@
 from ninja import NinjaAPI
 
+from subjects.api import router as subjects_router
+
 api = NinjaAPI()
 
-
-@api.get("/hello")
-def hello(request):
-    return "Hello world"
+api.add_router("/subjects/", subjects_router)

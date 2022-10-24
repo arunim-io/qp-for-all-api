@@ -15,12 +15,16 @@ version     = "0.1.0"
   black         = "^22.10.0"
   django-types  = "^0.16.0"
   isort         = "^5.10.1"
+  poethepoet    = "^0.16.4"
   pylint        = { version = "^2.15.5", python = ">=3.7.2,<4.0" }
   pylint-django = "^2.5.3"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires      = ["poetry-core"]
+
+[tool.poe.tasks]
+dev = { cmd = "python manage.py runserver", env = { DEBUG = "True" } }
 
 [tool.pylint.main]
 django-settings-module = "config.settings"
@@ -31,8 +35,7 @@ load-plugins           = "pylint_django"
 max-line-length = "79"
 
 [tool.isort]
-lines_after_imports = 2
-profile             = "django"
+profile = "django"
 
 [tool.black]
 line-length = 79

@@ -1,0 +1,47 @@
+{% load static %}
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <!-- {% comment %}
+    <link
+      type="text/css"
+      rel="stylesheet"
+      href="{% static 'ninja/swagger-ui.3.51.2.css' %}"
+    />
+    {% endcomment %} -->
+    <link rel="shortcut icon" href="{% static 'ninja/favicon.png' %}" />
+    <script
+      type="module"
+      src="https://unpkg.com/rapidoc/dist/rapidoc-min.js"
+    ></script>
+    <title>{{ api.title }}</title>
+  </head>
+  <body>
+    <rapi-doc spec-url="{{ openapi_json_url }}"></rapi-doc>
+    <!-- {% comment %}
+    <div id="swagger-ui"></div>
+    <script src="{% static 'ninja/swagger-ui-bundle.3.51.2.js' %}"></script>
+    <script>
+           const ui = SwaggerUIBundle({
+               url: '{{ openapi_json_url }}',
+               dom_id: '#swagger-ui',
+               presets: [
+               SwaggerUIBundle.presets.apis,
+               SwaggerUIBundle.SwaggerUIStandalonePreset
+               ],
+               layout: "BaseLayout",
+           {% if api.csrf and csrf_token %}
+               requestInterceptor: (req) => {
+      	req.headers['X-CSRFToken'] = "{{csrf_token}}"
+      	return req;
+      },
+           {% endif %}
+               deepLinking: true
+           })
+    </script>
+    {% endcomment %} -->
+  </body>
+</html>
