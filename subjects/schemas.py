@@ -1,11 +1,14 @@
 from typing import List
 
 from ninja import ModelSchema
-from ninja.orm import create_schema
 
 from .models import Paper, Session, Subject
 
-SessionSchema = create_schema(Session)
+
+class SessionSchema(ModelSchema):
+    class Config:
+        model = Session
+        model_fields = "__all__"
 
 
 class PaperSchema(ModelSchema):
@@ -19,42 +22,42 @@ class PaperSchema(ModelSchema):
         model_fields = "__all__"
 
     @staticmethod
-    def resolve_subject(obj: Paper):
+    def resolve_subject(obj: Paper) -> str:
         return obj.subject.name
 
     @staticmethod
-    def resolve_curriculum(obj: Paper):
+    def resolve_curriculum(obj: Paper) -> str:
         return obj.curriculum.name
 
     @staticmethod
-    def resolve_qualification(obj: Paper):
+    def resolve_qualification(obj: Paper) -> str:
         return obj.qualification.name
 
     @staticmethod
-    def resolve_session(obj: Paper):
+    def resolve_session(obj: Paper) -> str:
         return obj.session.name
 
 
 class SubjectSchema(ModelSchema):
     curriculums: List[str]
     qualifications: List[str]
-    sessions: List[SessionSchema]  # type: ignore
-    papers: List[PaperSchema]  # type: ignore
+    sessions: List[SessionSchema]
+    papers: List[PaperSchema]
 
     class Config:
         model = Subject
         model_fields = "__all__"
 
     @staticmethod
-    def resolve_curriculums(obj: Subject):
+    def resolve_curriculums(obj: Subject) -> List[str]:
         return [curriculum.name for curriculum in obj.curriculums.all()]
 
     @staticmethod
-    def resolve_qualifications(obj: Subject):
+    def resolve_qualifications(obj: Subject) -> List[str]:
         return [
             qualification.name for qualification in obj.qualifications.all()
         ]
 
     @staticmethod
     def resolve_papers(obj: Subject):
-        return Paper.objects.filter(subject__id=obj.id)  # type: ignore
+        return Paper.objects.filter(subject__id=obj.id)

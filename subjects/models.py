@@ -2,6 +2,7 @@ from django.db import models
 
 
 class Curriculum(models.Model):
+    id: int
     name = models.CharField(max_length=10)
 
     class Meta:
@@ -13,6 +14,7 @@ class Curriculum(models.Model):
 
 
 class Qualification(models.Model):
+    id: int
     name = models.CharField(max_length=10)
 
     class Meta:
@@ -24,6 +26,7 @@ class Qualification(models.Model):
 
 
 class Session(models.Model):
+    id: int
     name = models.CharField(max_length=255)
 
     class Meta:
@@ -35,6 +38,7 @@ class Session(models.Model):
 
 
 class Subject(models.Model):
+    id: int
     name = models.CharField(max_length=255)
     curriculums = models.ManyToManyField(
         Curriculum, related_name="curriculums"
@@ -53,6 +57,7 @@ class Subject(models.Model):
 
 
 class Paper(models.Model):
+    id: int
     title = models.CharField(max_length=255)
     subject = models.ForeignKey(
         Subject, related_name="subject", on_delete=models.CASCADE

@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from typing import List
 
 from decouple import config
 
@@ -24,14 +25,14 @@ BASE_DIR = Path(__file__).resolve().parent.parent.parent
 # SECURITY WARNING: keep the secret key used in production secret!
 SECRET_KEY = config(
     "SECRET_KEY",
-    default="django-insecure-_rsb13#a&caa31d_r@69foio5(q17*fd@y$-+fpq@yl^((lms&",
+    default="django-insecure-_rsb13#a&caa31d_r@69foio5(q17*fd@y$-+fpq@yl^((lms&",  # pylint: disable
     cast=str,
 )
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = config("DEBUG", default=False, cast=bool)
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS: List[str] = []
 
 
 # Application definition

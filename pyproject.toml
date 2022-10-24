@@ -13,10 +13,11 @@ version     = "0.1.0"
 
   [tool.poetry.group.dev.dependencies]
   black         = "^22.10.0"
-  django-types  = "^0.16.0"
+  django-stubs  = { extras = ["compatible-mypy"], version = "^1.12.0" }
   isort         = "^5.10.1"
+  mypy          = ">=0.930,<0.970"
   poethepoet    = "^0.16.4"
-  pylint        = { version = "^2.15.5", python = ">=3.7.2,<4.0" }
+  pylint        = { version = "2.14.5", python = ">=3.7.2,<4.0" }
   pylint-django = "^2.5.3"
 
 [build-system]
@@ -27,6 +28,7 @@ requires      = ["poetry-core"]
 dev = { cmd = "python manage.py runserver", env = { DEBUG = "True" } }
 
 [tool.pylint.main]
+disable                = ["wrong-import-order", "C0114", "C0115", "C0116", "W0223"]
 django-settings-module = "config.settings"
 ignore                 = ["migrations", "__init__.py"]
 load-plugins           = "pylint_django"
@@ -39,3 +41,9 @@ profile = "django"
 
 [tool.black]
 line-length = 79
+
+[tool.mypy]
+plugins = ["mypy_django_plugin.main"]
+
+[tool.django-stubs]
+django_settings_module = "config.settings"
