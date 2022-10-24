@@ -6,14 +6,33 @@ readme      = "README.md"
 version     = "0.1.0"
 
   [tool.poetry.dependencies]
-  django          = "^4.1.2"
+  django          = { version = "^4.1.2", python = ">=3.8,<4.0" }
   django-ninja    = "^0.19.1"
   python          = "^3.7"
   python-decouple = "^3.6"
 
   [tool.poetry.group.dev.dependencies]
-  black = "^22.10.0"
+  black         = "^22.10.0"
+  django-types  = "^0.16.0"
+  isort         = "^5.10.1"
+  pylint        = { version = "^2.15.5", python = ">=3.7.2,<4.0" }
+  pylint-django = "^2.5.3"
 
 [build-system]
 build-backend = "poetry.core.masonry.api"
 requires      = ["poetry-core"]
+
+[tool.pylint.main]
+django-settings-module = "config.settings"
+ignore                 = ["migrations", "__init__.py"]
+load-plugins           = "pylint_django"
+
+[tool.pylint.format]
+max-line-length = "79"
+
+[tool.isort]
+lines_after_imports = 2
+profile             = "django"
+
+[tool.black]
+line-length = 79
