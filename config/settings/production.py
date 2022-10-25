@@ -1,4 +1,6 @@
-from .main import BASE_DIR
+from .main import ALLOWED_HOSTS, BASE_DIR
+
+ALLOWED_HOSTS += ["*"]
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
@@ -11,4 +13,4 @@ DATABASES = {
 }
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedManifestStaticFilesStorage"
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
