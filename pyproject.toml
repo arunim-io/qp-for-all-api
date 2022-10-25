@@ -6,21 +6,19 @@ readme      = "README.md"
 version     = "0.1.0"
 
   [tool.poetry.dependencies]
-  dj-database-url = "^1.0.0"
-  django          = { version = "^4.1.2", python = ">=3.8,<4.0" }
+  django          = "^4.1.2"
   django-ninja    = "^0.19.1"
-  psycopg2-binary = "^2.9.4"
-  python          = "^3.7"
+  gunicorn        = "^20.1.0"
+  poethepoet      = "^0.16.4"
+  python          = "^3.8"
   python-decouple = "^3.6"
-  whitenoise = {extras = ["brotli"], version = "^6.2.0"}
-  gunicorn = "^20.1.0"
+  whitenoise      = { extras = ["brotli"], version = "^6.2.0" }
 
   [tool.poetry.group.dev.dependencies]
   black         = "^22.10.0"
   django-stubs  = { extras = ["compatible-mypy"], version = "^1.12.0" }
   isort         = "^5.10.1"
   mypy          = ">=0.930,<0.970"
-  poethepoet    = "^0.16.4"
   pylint        = { version = "2.14.5", python = ">=3.7.2,<4.0" }
   pylint-django = "^2.5.3"
 
@@ -28,8 +26,18 @@ version     = "0.1.0"
 build-backend = "poetry.core.masonry.api"
 requires      = ["poetry-core"]
 
+[tool.poe.poetry_hooks]
+post_add     = "export"
+post_install = "export"
+post_lock    = "export"
+post_remove  = "export"
+post_update  = "export"
+
 [tool.poe.tasks]
-dev = { cmd = "python manage.py runserver", env = { DEBUG = "True" } }
+dev           = { cmd = "python manage.py runserver", env = { DEBUG = "True" } }
+dump-database = { shell = "python manage.py dumpdata subjects > subjects/fixtures.json" }
+export        = { shell = "poetry export --without-hashes -o requirements.txt" }
+seed-database = "python manage.py loaddata subjects/fixtures.json"
 
 [tool.pylint.main]
 disable                = ["wrong-import-order", "C0114", "C0115", "C0116", "W0223"]

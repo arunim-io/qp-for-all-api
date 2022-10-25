@@ -1,18 +1,13 @@
-import dj_database_url
-from decouple import config
+from .main import BASE_DIR
 
-from .main import ALLOWED_HOSTS, BASE_DIR
-
-if RENDER_EXTERNAL_HOSTNAME := config(
-    "RENDER_EXTERNAL_HOSTNAME", cast=str, default=None
-):
-    ALLOWED_HOSTS.append(RENDER_EXTERNAL_HOSTNAME)
+# Database
+# https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": dj_database_url.config(
-        default="postgresql://postgres:postgres@localhost:5432/qp-for-all",
-        conn_max_age=600,
-    )
+    "default": {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 }
 
 STATIC_ROOT = BASE_DIR / "staticfiles"
