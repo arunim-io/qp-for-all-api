@@ -1,7 +1,7 @@
 databases:
   - name: qp-for-all
-    databaseName: qp_for_all
-    user: qp_for_all
+    databaseName: qp-for-all
+    user: qp-for-all
 
 services:
   - type: web
