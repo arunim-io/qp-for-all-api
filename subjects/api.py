@@ -1,37 +1,51 @@
 from typing import List
 
-from django.http import HttpRequest
-from django.shortcuts import get_object_or_404
 from ninja import Router
 
+from django.db.models import Q
+from django.http import HttpRequest
+from django.shortcuts import get_object_or_404
+
 from .models import Subject
-from .schemas import SessionSchema, SubjectSchema
+from .schemas import SubjectSchema
 
 router = Router()
 
 
 @router.get("/", response=List[SubjectSchema])
-def get_subjects(request: HttpRequest, curriculum: str = ""):
+def get_subjects(
+    request: HttpRequest, curriculum: str = "", qualification: str = ""
+):
     """
     Get a list of subjects.
     """
 
-    return Subject.objects.filter(curriculums__name__contains=curriculum)
+    filters = Q()
+
+    if curriculum != "":
+        filters &= Q(curriculums__name=curriculum)
+    if qualification != "":
+        filters &= Q(qualifications__name=qualification)
+
+    return Subject.objects.filter(filters)
 
 
-@router.get("/{subject_id}", response=SubjectSchema)
-def get_subject(request: HttpRequest, subject_id: int):
+@router.get("/{pk}/", response=SubjectSchema)
+def get_subject(
+    request: HttpRequest,
+    pk: int,  # pylint: disable=C0103
+    curriculum: str = "",
+    qualification: str = "",
+):
     """
     Get a subject by id.
     """
 
-    return get_object_or_404(Subject, id=subject_id)
+    filters = Q(pk=pk)
 
+    if curriculum != "":
+        filters &= Q(papers__curriculums__name=curriculum)
+    if qualification != "":
+        filters &= Q(papers__qualifications__name=qualification)
 
-@router.get("/{subject_id}/sessions/", response=List[SessionSchema])
-def get_sessions(request: HttpRequest, subject_id: int):
-    """
-    Get a list of sessions for a subject.
-    """
-
-    return get_object_or_404(Subject, id=subject_id).sessions
+    return get_object_or_404(Subject, filters)

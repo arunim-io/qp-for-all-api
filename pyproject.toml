@@ -39,6 +39,9 @@ dump-database = { shell = "python manage.py dumpdata subjects > subjects/fixture
 export        = { shell = "poetry export --without-hashes -o requirements.txt" }
 seed-database = "python manage.py loaddata subjects/fixtures.json"
 
+[tool.pyright]
+exclude = [".venv"]
+
 [tool.pylint.main]
 disable                = ["wrong-import-order", "C0114", "C0115", "C0116", "W0223"]
 django-settings-module = "config.settings"
