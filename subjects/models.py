@@ -46,8 +46,10 @@ class Subject(models.Model):
     qualifications = models.ManyToManyField(
         Qualification, related_name="qualifications"
     )
-    sessions = models.ManyToManyField(Session, related_name="sessions")
-    papers = models.ManyToManyField("Paper", related_name="papers")
+    sessions = models.ManyToManyField(
+        Session, related_name="sessions", blank=True
+    )
+    papers = models.ManyToManyField("Paper", related_name="papers", blank=True)
 
     class Meta:
         verbose_name = "Subject"
