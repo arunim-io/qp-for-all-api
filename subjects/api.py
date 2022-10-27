@@ -2,50 +2,82 @@ from typing import List
 
 from ninja import Router
 
-from django.db.models import Q
-from django.http import HttpRequest
 from django.shortcuts import get_object_or_404
 
-from .models import Subject
+from .models import Paper, Subject
 from .schemas import SubjectSchema
 
 router = Router()
 
 
 @router.get("/", response=List[SubjectSchema])
-def get_subjects(
-    request: HttpRequest, curriculum: str = "", qualification: str = ""
-):
+def get_subjects(request):
     """
     Get a list of subjects.
     """
 
-    filters = Q()
-
-    if curriculum != "":
-        filters &= Q(curriculums__name=curriculum)
-    if qualification != "":
-        filters &= Q(qualifications__name=qualification)
-
-    return Subject.objects.filter(filters)
+    return Subject.objects.all()
 
 
-@router.get("/{pk}/", response=SubjectSchema)
+@router.get("/{subject_id}/", response=SubjectSchema)
 def get_subject(
-    request: HttpRequest,
-    pk: int,  # pylint: disable=C0103
-    curriculum: str = "",
-    qualification: str = "",
+    request, subject_id: int, curriculum: str = "", qualification: str = ""
 ):
     """
     Get a subject by id.
     """
 
-    filters = Q(pk=pk)
+    if curriculum:
+        if qualification:
+            if Paper.objects.filter(
+                subject__id=subject_id,
+                curriculum__name=curriculum,
+                qualification__name=qualification,
+            ).exists():
+                return get_object_or_404(
+                    Subject,
+                    id=subject_id,
+                    curriculums__name=curriculum,
+                    qualifications__name=qualification,
+                    papers__curriculum__name=curriculum,
+                    papers__qualification__name=qualification,
+                )
 
-    if curriculum != "":
-        filters &= Q(papers__curriculums__name=curriculum)
-    if qualification != "":
-        filters &= Q(papers__qualifications__name=qualification)
+            return get_object_or_404(
+                Subject,
+                id=subject_id,
+                curriculums__name=curriculum,
+                qualifications__name=qualification,
+            )
 
-    return get_object_or_404(Subject, filters)
+        if Paper.objects.filter(
+            subject__id=subject_id, curriculum__name=curriculum
+        ).exists():
+            return get_object_or_404(
+                Subject,
+                id=subject_id,
+                curriculums__name=curriculum,
+                papers__curriculum__name=curriculum,
+            )
+
+        return get_object_or_404(
+            Subject, id=subject_id, curriculums__name=curriculum
+        )
+
+    if not qualification:
+        return get_object_or_404(Subject, id=subject_id)
+
+    return (
+        get_object_or_404(
+            Subject,
+            id=subject_id,
+            qualifications__name=qualification,
+            papers__qualification__name=qualification,
+        )
+        if Paper.objects.filter(
+            subject__id=subject_id, qualification__name=qualification
+        ).exists()
+        else get_object_or_404(
+            Subject, id=subject_id, qualifications__name=qualification
+        )
+    )
