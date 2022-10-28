@@ -1,9 +1,8 @@
 import dj_database_url
-from decouple import config
 
 from .main import ALLOWED_HOSTS, BASE_DIR
 
-ALLOWED_HOSTS += [config("RENDER_EXTERNAL_HOSTNAME")]
+ALLOWED_HOSTS += ["0.0.0.0"]
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
