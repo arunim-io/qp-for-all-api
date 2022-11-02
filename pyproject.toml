@@ -18,7 +18,7 @@ version     = "0.1.0"
   [tool.poetry.group.dev.dependencies]
   black         = "^22.10.0"
   django-stubs  = { extras = ["compatible-mypy"], version = "^1.12.0" }
-  isort         = "^5.10.1"
+  isort         = { extras = ["requirements_deprecated_finder"], version = "^5.10.1" }
   mypy          = ">=0.930,<0.970"
   poethepoet    = "^0.16.4"
   pylint        = { version = "2.14.5", python = ">=3.7.2,<4.0" }
@@ -36,10 +36,8 @@ post_remove  = "export"
 post_update  = "export"
 
 [tool.poe.tasks]
-dev           = { cmd = "python manage.py runserver", env = { DEBUG = "True" } }
-dump-database = { shell = "python manage.py dumpdata subjects > subjects/fixtures.json" }
-export        = { shell = "poetry export --without-hashes -o requirements.txt" }
-seed-database = "python manage.py loaddata subjects/fixtures.json"
+dev    = { cmd = "python manage.py runserver", env = { DEBUG = "True" } }
+export = { shell = "poetry export --without-hashes -o requirements.txt" }
 
 [tool.pyright]
 exclude = [".venv"]

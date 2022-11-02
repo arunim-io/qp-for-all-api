@@ -2,7 +2,7 @@ import dj_database_url
 
 from .main import ALLOWED_HOSTS, BASE_DIR
 
-ALLOWED_HOSTS += ["0.0.0.0"]
+ALLOWED_HOSTS += ["0.0.0.0"]  # type: ignore
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

@@ -11,12 +11,16 @@ router = Router()
 
 
 @router.get("/", response=List[SubjectSchema])
-def get_subjects(request):
+def get_subjects(request, query: str = ""):
     """
     Get a list of subjects.
     """
 
-    return Subject.objects.all()
+    return (
+        Subject.objects.filter(name=query.capitalize())
+        if query
+        else Subject.objects.all()
+    )
 
 
 @router.get("/{subject_id}/", response=SubjectSchema)
