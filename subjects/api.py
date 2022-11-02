@@ -17,7 +17,7 @@ def get_subjects(request, query: str = ""):
     """
 
     return (
-        Subject.objects.filter(name=query)
+        Subject.objects.filter(name__icontains=query)
         if query
         else Subject.objects.all()
     )
