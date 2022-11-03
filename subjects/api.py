@@ -11,10 +11,8 @@ router = Router()
 
 
 @router.get("/", response=List[SubjectSchema])
-def get_subjects(request, query: str = ""):
-    """
-    Get a list of subjects.
-    """
+def get_subjects(_, query: str = ""):
+    """Get a list of subjects"""
 
     return (
         Subject.objects.filter(name__icontains=query)
@@ -24,14 +22,85 @@ def get_subjects(request, query: str = ""):
 
 
 @router.get("/{subject_id}/", response=SubjectSchema)
-def get_subject(
-    request, subject_id: int, curriculum: str = "", qualification: str = ""
-):
-    """
-    Get a subject by id.
-    """
+def get_subject(_, subject_id: int, curriculum="", qualification="", query=""):
+    """Get a subject by id"""
 
-    if curriculum:
+    if query:
+        if curriculum:
+            if qualification:
+                if Paper.objects.filter(
+                    subject__id=subject_id,
+                    curriculum__name=curriculum,
+                    qualification__name=qualification,
+                    session__name__icontains=query,
+                ).exists():
+                    return get_object_or_404(
+                        Subject,
+                        id=subject_id,
+                        curriculums__name=curriculum,
+                        qualifications__name=qualification,
+                        papers__curriculum__name=curriculum,
+                        papers__qualification__name=qualification,
+                        sessions__name__icontains=query,
+                    )
+
+                return get_object_or_404(
+                    Subject,
+                    id=subject_id,
+                    curriculums__name=curriculum,
+                    qualifications__name=qualification,
+                    sessions__name__icontains=query,
+                )
+
+            if Paper.objects.filter(
+                subject__id=subject_id,
+                curriculum__name=curriculum,
+                session__name__icontains=query,
+            ).exists():
+                return get_object_or_404(
+                    Subject,
+                    id=subject_id,
+                    curriculums__name=curriculum,
+                    papers__curriculum__name=curriculum,
+                    sessions__name__icontains=query,
+                )
+
+            return get_object_or_404(
+                Subject,
+                id=subject_id,
+                curriculums__name=curriculum,
+                sessions__name__icontains=query,
+            )
+
+        if qualification:
+            return (
+                get_object_or_404(
+                    Subject,
+                    id=subject_id,
+                    qualifications__name=qualification,
+                    papers__qualification__name=qualification,
+                    sessions__name__icontains=query,
+                )
+                if Paper.objects.filter(
+                    subject__id=subject_id,
+                    qualification__name=qualification,
+                    session__name__icontains=query,
+                ).exists()
+                else get_object_or_404(
+                    Subject,
+                    id=subject_id,
+                    qualifications__name=qualification,
+                    sessions__name__icontains=query,
+                )
+            )
+        else:
+            return get_object_or_404(
+                Subject,
+                id=subject_id,
+                sessions__name__icontains=query,
+            )
+
+    elif curriculum:
         if qualification:
             if Paper.objects.filter(
                 subject__id=subject_id,
