@@ -1,5 +1,7 @@
 from .main import ALLOWED_HOSTS, BASE_DIR
 
+SERVER_URL = "http://localhost:8000"
+
 ALLOWED_HOSTS += ["*"]
 
 # Database

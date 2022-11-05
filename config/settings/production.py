@@ -1,8 +1,11 @@
 import dj_database_url
+from decouple import config
 
 from .main import ALLOWED_HOSTS, BASE_DIR
 
-ALLOWED_HOSTS += ["0.0.0.0"]  # type: ignore
+SERVER_URL = config("SERVER_URL", cast=str)
+
+ALLOWED_HOSTS += ["0.0.0.0", SERVER_URL]
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases

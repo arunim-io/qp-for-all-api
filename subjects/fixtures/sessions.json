@@ -1,0 +1,1 @@
+[{"model": "subjects.session", "pk": 1, "fields": {"name": "January 2022"}}, {"model": "subjects.session", "pk": 2, "fields": {"name": "May 2021"}}]

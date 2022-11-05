@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/4.1/ref/settings/
 """
 
 from pathlib import Path
+from typing import List
 
 from decouple import config
 
@@ -32,7 +33,7 @@ SECRET_KEY = config(
 DEBUG = config("DEBUG", default=False, cast=bool)
 
 # https://docs.djangoproject.com/en/4.1/ref/settings/#allowed-hosts
-ALLOWED_HOSTS = []  # type: ignore
+ALLOWED_HOSTS: List[str] = []
 
 
 # Application definition
@@ -115,6 +116,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = "static/"
+
+MEDIA_URL = "uploads/"
+
+MEDIA_ROOT = BASE_DIR / "public"
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field

@@ -74,8 +74,8 @@ class Paper(models.Model):
     session = models.ForeignKey(
         Session, related_name="session", on_delete=models.CASCADE
     )
-    qp_url = models.URLField(max_length=255)
-    ms_url = models.URLField(max_length=255)
+    question_paper = models.FileField(upload_to="question_papers/")
+    mark_scheme = models.FileField(upload_to="mark_schemes/")
 
     class Meta:
         verbose_name = "Paper"

@@ -2,6 +2,8 @@ from typing import List
 
 from ninja import ModelSchema
 
+from django.conf import settings
+
 from .models import Paper, Session, Subject
 
 
@@ -16,10 +18,13 @@ class PaperSchema(ModelSchema):
     curriculum: str
     qualification: str
     session: str
+    qp_url: str
+    ms_url: str
 
     class Config:
         model = Paper
         model_fields = "__all__"
+        model_exclude = ["question_paper", "mark_scheme"]
 
     @staticmethod
     def resolve_subject(obj: Paper) -> str:
@@ -36,6 +41,14 @@ class PaperSchema(ModelSchema):
     @staticmethod
     def resolve_session(obj: Paper) -> str:
         return obj.session.name
+
+    @staticmethod
+    def resolve_qp_url(obj: Paper) -> str:
+        return settings.SERVER_URL + obj.question_paper.url
+
+    @staticmethod
+    def resolve_ms_url(obj: Paper) -> str:
+        return settings.SERVER_URL + obj.mark_scheme.url
 
 
 class SubjectSchema(ModelSchema):
