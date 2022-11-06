@@ -1,6 +1,6 @@
 from .main import ALLOWED_HOSTS, BASE_DIR
 
-SERVER_URL = "http://localhost:8000"
+SERVER_URL = "http://10.0.0.2:8000"
 
 ALLOWED_HOSTS += ["*"]
 
