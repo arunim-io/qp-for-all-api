@@ -36,7 +36,7 @@ post_remove  = "export"
 post_update  = "export"
 
 [tool.poe.tasks]
-dev    = { cmd = "python manage.py runserver", env = { DEBUG = "True" } }
+dev    = { cmd = "python manage.py runserver 0.0.0.0:8000", env = { DEBUG = "True" } }
 export = { shell = "poetry export --without-hashes -o requirements.txt" }
 
 [tool.pyright]
