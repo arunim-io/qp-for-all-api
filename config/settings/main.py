@@ -34,8 +34,6 @@ DEBUG = config("DEBUG", default=False)
 # https://docs.djangoproject.com/en/4.1/ref/settings/#allowed-hosts
 ALLOWED_HOSTS: list[str] = []
 
-CSRF_TRUSTED_ORIGINS: list[str] = []
-
 
 # Application definition
 
