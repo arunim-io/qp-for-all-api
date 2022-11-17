@@ -32,7 +32,7 @@ SECRET_KEY = config(
 DEBUG = config("DEBUG", default=False)
 
 # https://docs.djangoproject.com/en/4.1/ref/settings/#allowed-hosts
-ALLOWED_HOSTS: list[str] = []
+ALLOWED_HOSTS = []
 
 
 # Application definition
