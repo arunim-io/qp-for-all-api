@@ -5,17 +5,30 @@ from .main import ALLOWED_HOSTS, BASE_DIR
 
 SERVER_URL = config("SERVER_URL", cast=str)
 
-ALLOWED_HOSTS += ["0.0.0.0", SERVER_URL]
+ALLOWED_HOSTS += [
+    SERVER_URL,
+    "0.0.0.0",
+    "localhost",
+    "127.0.0.1",
+    "[::1]",
+]
 
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
-DATABASES = {
-    "default": dj_database_url.config(
-        default="postgresql://postgres:postgres@localhost:5432/mysite",
+
+try:
+    DATABASE_URL: str = config("DATABASE_URL")  # type: ignore
+    DATABASE = dj_database_url.config(
+        default=DATABASE_URL,
         conn_max_age=600,
     )
-}
+except Exception:
+    DATABASE = {
+        "ENGINE": "django.db.backends.sqlite3",
+        "NAME": BASE_DIR / "db.sqlite3",
+    }
 
-STATIC_ROOT = BASE_DIR / "staticfiles"
-STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"
+DATABASES = {
+    "default": DATABASE,
+}

@@ -8,5 +8,6 @@
   "python.analysis.typeCheckingMode": "basic",
   "python.formatting.provider": "black",
   "python.linting.mypyEnabled": true,
-  "python.analysis.exclude": ["**/migrations/**", "**/.venv/**"]
+  "python.analysis.exclude": ["**/migrations/**", "**/.venv/**"],
+  "cSpell.words": ["PYTHONDONTWRITEBYTECODE", "PYTHONUNBUFFERED"]
 }
