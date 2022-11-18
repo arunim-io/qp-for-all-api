@@ -4,7 +4,7 @@ FROM python:slim-buster
 ENV PYTHONUNBUFFERED=1
 ENV PYTHONDONTWRITEBYTECODE=1
 
-RUN apt-get update; apt-get install -y python3-pip build-essential libssl-dev libffi-dev python3-dev python-dev; apt-get clean; apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; rm -rf /var/lib/apt/lists/*
+RUN apt-get update; apt-get install -y python3-pip build-essential libssl-dev libffi-dev python3-dev python-dev default-libmysqlclient-dev; apt-get clean; apt-get purge -y --auto-remove -o APT::AutoRemove::RecommendsImportant=false; rm -rf /var/lib/apt/lists/*
 RUN pip install --upgrade pip
 
 RUN mkdir -p /app
