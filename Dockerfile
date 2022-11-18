@@ -20,9 +20,5 @@ COPY . /app/
 
 RUN echo "SECRET_KEY=$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')" > ./config/.env
 
-RUN python manage.py collectstatic --noinput
-RUN python manage.py migrate --noinput
-RUN python manage.py loaddata ./subjects/fixtures/curriculums.json ./subjects/fixtures/papers.json ./subjects/fixtures/qualifications.json ./subjects/fixtures/sessions.json ./subjects/fixtures/subjects.json
-
 EXPOSE 8000
 CMD ["gunicorn", "config.wsgi:application", "--bind", ":8000", "--log-file=-"]

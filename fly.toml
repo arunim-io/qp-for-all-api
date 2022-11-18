@@ -1,9 +1,10 @@
-# fly.toml file generated for qp-for-all-api on 2022-11-18T20:59:46+06:00
-
 app          = "qp-for-all-api"
 kill_signal  = "SIGINT"
 kill_timeout = 5
 processes    = []
+
+[deploy]
+release_command = "sh ./build.sh"
 
 [env]
 PORT = "8000"
