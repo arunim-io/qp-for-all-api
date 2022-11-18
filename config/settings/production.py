@@ -3,12 +3,14 @@ from decouple import config
 
 from .main import ALLOWED_HOSTS
 
-SERVER_URL = config("SERVER_URL", default="qp-for-all-api.onrender.com")
+SERVER_URL = config(
+    "SERVER_URL", default="https://qp-for-all-api.onrender.com"
+)
 
-CSRF_TRUSTED_ORIGINS = [f"https://{SERVER_URL}"]
+CSRF_TRUSTED_ORIGINS = [SERVER_URL]
 
 ALLOWED_HOSTS += [
-    SERVER_URL,
+    SERVER_URL.removeprefix("https://"),  # type: ignore
     "0.0.0.0",
     "localhost",
     "127.0.0.1",
