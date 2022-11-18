@@ -17,7 +17,9 @@ RUN rm -rf /root/.cache/
 
 COPY . /app/
 
-RUN sh ./scripts/build.sh
+RUN python manage.py collectstatic --noinput
+RUN python manage.py migrate --noinput
+RUN python manage.py loaddata ./subjects/fixtures/curriculums.json ./subjects/fixtures/papers.json ./subjects/fixtures/qualifications.json ./subjects/fixtures/sessions.json ./subjects/fixtures/subjects.json
 
 EXPOSE 8000
-CMD ["gunicorn", "config.wsgi:application", "--bind", ":8000","--workers", "2", "--log-file=-"]
+CMD ["gunicorn", "config.wsgi:application", "--bind", ":8000", "--log-file=-"]
