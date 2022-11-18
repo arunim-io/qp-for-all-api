@@ -1,6 +1,7 @@
+import dj_database_url
 from decouple import config
 
-from .main import ALLOWED_HOSTS, BASE_DIR
+from .main import ALLOWED_HOSTS
 
 SERVER_URL = config(
     "SERVER_URL", default="https://qp-for-all-api.onrender.com"
@@ -18,8 +19,8 @@ ALLOWED_HOSTS += [
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": "django.db.backends.sqlite3",
-        "NAME": BASE_DIR / "db.sqlite3",
-    },
+    "default": dj_database_url.parse(
+        str(config("DATABASE_URL")),
+        conn_max_age=600,
+    ),
 }
