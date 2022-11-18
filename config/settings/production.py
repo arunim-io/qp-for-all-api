@@ -2,7 +2,9 @@ from decouple import config
 
 from .main import ALLOWED_HOSTS, BASE_DIR
 
-SERVER_URL = config("SERVER_URL", cast=str)
+SERVER_URL = config(
+    "SERVER_URL", default="https://qp-for-all-api.onrender.com"
+)
 
 ALLOWED_HOSTS += [
     SERVER_URL,
