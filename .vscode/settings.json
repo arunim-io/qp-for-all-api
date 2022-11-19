@@ -7,7 +7,11 @@
   "python.analysis.useLibraryCodeForTypes": true,
   "python.analysis.typeCheckingMode": "basic",
   "python.formatting.provider": "black",
+  "python.envFile": "${workspaceFolder}/.env",
   "python.linting.mypyEnabled": true,
   "python.analysis.exclude": ["**/migrations/**", "**/.venv/**"],
-  "cSpell.words": ["PYTHONDONTWRITEBYTECODE", "PYTHONUNBUFFERED"]
+  "cSpell.words": ["PYTHONDONTWRITEBYTECODE", "PYTHONUNBUFFERED"],
+  "pylint.importStrategy": "fromEnvironment",
+  "isort.importStrategy": "fromEnvironment",
+  "black-formatter.importStrategy": "fromEnvironment"
 }

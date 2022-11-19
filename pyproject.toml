@@ -45,8 +45,8 @@ exclude = [".venv"]
 [tool.pylint.main]
 disable                = ["wrong-import-order", "C0114", "C0115", "C0116", "W0223"]
 django-settings-module = "config.settings"
-ignore                 = ["migrations", "__init__.py"]
-load-plugins           = "pylint_django"
+ignore-patterns        = ["migrations/", "__init__.py"]
+load-plugins           = ["pylint_django", "pylint_django.checkers.migrations"]
 
 [tool.pylint.format]
 max-line-length = "79"
