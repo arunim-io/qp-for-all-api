@@ -1,28 +1,33 @@
 import dj_database_url
 from decouple import config
 
-from .main import ALLOWED_HOSTS
+from .main import ALLOWED_HOSTS, MIDDLEWARE
 
-SERVER_URL = config(
-    "SERVER_URL", default="https://qp-for-all-api.onrender.com"
-)
+SERVER_HOST = config("SERVER_HOST", default="qp-for-all-api.fly.dev")
 
-CSRF_TRUSTED_ORIGINS = [SERVER_URL]
+SERVER_URL = f"https://{SERVER_HOST}"
+
+CSRF_TRUSTED_ORIGINS = [
+    "https://qp-for-all-api.fly.dev",
+]
 
 ALLOWED_HOSTS += [
-    SERVER_URL.removeprefix("https://"),  # type: ignore
+    "qp-for-all-api.fly.dev",
     "0.0.0.0",
     "localhost",
     "127.0.0.1",
     "[::1]",
 ]
 
+MIDDLEWARE.insert(1, "whitenoise.middleware.WhiteNoiseMiddleware")
+
 # Database
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
     "default": dj_database_url.parse(
-        str(config("DATABASE_URL")),
-        conn_max_age=600,
+        str(config("DATABASE_URL")), conn_max_age=600
     ),
 }
+
+STATICFILES_STORAGE = "whitenoise.storage.CompressedStaticFilesStorage"

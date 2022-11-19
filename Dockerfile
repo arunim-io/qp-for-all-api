@@ -20,5 +20,7 @@ COPY . /app/
 
 RUN echo "SECRET_KEY=$(python -c 'from django.core.management.utils import get_random_secret_key; print(get_random_secret_key())')" > ./config/.env
 
+
 EXPOSE 8000
-CMD ["gunicorn", "config.wsgi:application", "--bind", ":8000", "--log-file=-"]
+
+CMD ["/bin/bash", "-c", "python manage.py collectstatic --noinput; gunicorn --bind :8000 --workers 1 --log-file=- config.wsgi:application"]

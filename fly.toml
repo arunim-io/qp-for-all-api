@@ -4,7 +4,11 @@ kill_timeout = 5
 processes    = []
 
 [deploy]
-release_command = "sh ./build.sh"
+release_command = "python manage.py migrate"
+
+[[statics]]
+guest_path = "/app/static"
+url_prefix = "/static/"
 
 [env]
 PORT = "8000"
