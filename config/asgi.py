@@ -7,7 +7,7 @@ For more information on this file, see
 https://docs.djangoproject.com/en/4.1/howto/deployment/asgi/
 """
 
-from os import environ
+from os import environ  # pylint: disable=E0611
 
 from django.core.asgi import get_asgi_application
 
