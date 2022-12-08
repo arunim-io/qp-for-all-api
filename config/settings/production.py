@@ -7,12 +7,10 @@ SERVER_HOST = config("SERVER_HOST", default="qp-for-all-api.fly.dev")
 
 SERVER_URL = f"https://{SERVER_HOST}"
 
-CSRF_TRUSTED_ORIGINS = [
-    "https://qp-for-all-api.fly.dev",
-]
+CSRF_TRUSTED_ORIGINS = [SERVER_URL]
 
 ALLOWED_HOSTS += [
-    "qp-for-all-api.fly.dev",
+    SERVER_HOST,
     "0.0.0.0",
     "localhost",
     "127.0.0.1",
@@ -52,3 +50,7 @@ LOGGING = {
         },
     },
 }
+
+MEDIA_URL = (
+    "https://raw.githubusercontent.com/arunim-io/qp-for-all-api/main/public/"
+)

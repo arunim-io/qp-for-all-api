@@ -44,11 +44,11 @@ class PaperSchema(ModelSchema):
 
     @staticmethod
     def resolve_qp_url(obj: Paper) -> str:
-        return settings.SERVER_URL + obj.question_paper.url
+        return obj.question_paper.url
 
     @staticmethod
     def resolve_ms_url(obj: Paper) -> str:
-        return settings.SERVER_URL + obj.mark_scheme.url
+        return obj.mark_scheme.url
 
 
 class SubjectSchema(ModelSchema):

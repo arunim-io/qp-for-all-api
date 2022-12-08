@@ -1,9 +1,5 @@
 from .main import ALLOWED_HOSTS, BASE_DIR
 
-SERVER_HOST = "192.168.0.9:8000"
-
-SERVER_URL = f"http://{SERVER_HOST}"
-
 ALLOWED_HOSTS += ["*"]
 
 # Database
@@ -15,3 +11,5 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
+
+MEDIA_URL = "http://192.168.0.9:8000/uploads/"
