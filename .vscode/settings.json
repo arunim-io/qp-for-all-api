@@ -10,7 +10,14 @@
   "python.envFile": "${workspaceFolder}/.env",
   "python.linting.mypyEnabled": true,
   "python.analysis.exclude": ["**/migrations/**", "**/.venv/**"],
-  "cSpell.words": ["PYTHONDONTWRITEBYTECODE", "PYTHONUNBUFFERED"],
+  "cSpell.words": [
+    "autoupdate",
+    "commitizen",
+    "psycopg",
+    "pyright",
+    "PYTHONDONTWRITEBYTECODE",
+    "PYTHONUNBUFFERED"
+  ],
   "pylint.importStrategy": "fromEnvironment",
   "isort.importStrategy": "fromEnvironment",
   "black-formatter.importStrategy": "fromEnvironment"
