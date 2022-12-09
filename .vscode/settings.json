@@ -13,12 +13,17 @@
   "cSpell.words": [
     "autoupdate",
     "commitizen",
+    "flyctl",
     "psycopg",
     "pyright",
     "PYTHONDONTWRITEBYTECODE",
-    "PYTHONUNBUFFERED"
+    "PYTHONUNBUFFERED",
+    "superfly"
   ],
   "pylint.importStrategy": "fromEnvironment",
   "isort.importStrategy": "fromEnvironment",
-  "black-formatter.importStrategy": "fromEnvironment"
+  "black-formatter.importStrategy": "fromEnvironment",
+  "yaml.schemas": {
+    "https://json.schemastore.org/github-workflow.json": "file:///home/arunim/projects/qp_for_all/backend/.github/workflows/deploy.yml"
+  }
 }
