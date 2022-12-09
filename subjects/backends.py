@@ -7,7 +7,6 @@ import simplejson as json
 
 from django.conf import settings
 from django.core.files.storage import Storage
-from django.utils.encoding import force_str
 
 from .utils import get_url
 

@@ -125,7 +125,9 @@ DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
 DEFAULT_FILE_STORAGE = "subjects.backends.GitHubStorage"
+
 GITHUB_HANDLE = "arunim-io"
-ACCESS_TOKEN = "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"
+ACCESS_TOKEN = config("GITHUB_ACCESS_TOKEN")
 GITHUB_REPO_NAME = "qp-for-all-api"
-MEDIA_BUCKET_NAME = "media"
+
+MEDIA_BUCKET_NAME = "public"
