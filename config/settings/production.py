@@ -50,7 +50,3 @@ LOGGING = {
         },
     },
 }
-
-MEDIA_URL = (
-    "https://raw.githubusercontent.com/arunim-io/qp-for-all-api/main/public/"
-)

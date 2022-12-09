@@ -118,9 +118,14 @@ STATIC_URL = "/static/"
 
 STATIC_ROOT = BASE_DIR / "static"
 
-MEDIA_ROOT = BASE_DIR / "public"
-
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
+
+
+DEFAULT_FILE_STORAGE = "subjects.backends.GitHubStorage"
+GITHUB_HANDLE = "arunim-io"
+ACCESS_TOKEN = "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"
+GITHUB_REPO_NAME = "qp-for-all-api"
+MEDIA_BUCKET_NAME = "media"

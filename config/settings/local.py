@@ -11,5 +11,3 @@ DATABASES = {
         "NAME": BASE_DIR / "db.sqlite3",
     }
 }
-
-MEDIA_URL = "http://192.168.0.9:8000/uploads/"
