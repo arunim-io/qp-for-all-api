@@ -69,7 +69,7 @@ max-line-length = "79"
 [tool.isort]
 default_section    = "THIRDPARTY"
 known_first_party  = ["django"]
-known_local_folder = ["config", "subjects"]
+known_local_folder = ["config", "api"]
 known_third_party  = ["decouple", "ninja"]
 profile            = "django"
 skip_gitignore     = true

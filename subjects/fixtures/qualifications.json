@@ -1,1 +1,0 @@
-[{"model": "subjects.qualification", "pk": 1, "fields": {"name": "IGCSE"}}, {"model": "subjects.qualification", "pk": 2, "fields": {"name": "IAS"}}, {"model": "subjects.qualification", "pk": 3, "fields": {"name": "IA2"}}]

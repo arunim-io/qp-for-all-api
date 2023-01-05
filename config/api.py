@@ -1,6 +1,6 @@
 from ninja import NinjaAPI
 
-from subjects.api import router as subjects_router
+from api.router import router as subjects_router
 
 api = NinjaAPI(
     csrf=True,
@@ -9,4 +9,4 @@ api = NinjaAPI(
     description="The official API of QP for All",
 )
 
-api.add_router("/subjects/", subjects_router)
+api.add_router("/", subjects_router)

@@ -1,0 +1,4 @@
+[
+  { "model": "api.curriculum", "pk": 1, "fields": { "name": "Edexcel" } },
+  { "model": "api.curriculum", "pk": 2, "fields": { "name": "Cambridge" } }
+]

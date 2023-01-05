@@ -1,0 +1,5 @@
+[
+  { "model": "api.qualification", "pk": 1, "fields": { "name": "IGCSE" } },
+  { "model": "api.qualification", "pk": 2, "fields": { "name": "IAS" } },
+  { "model": "api.qualification", "pk": 3, "fields": { "name": "IA2" } }
+]

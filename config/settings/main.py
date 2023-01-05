@@ -46,7 +46,7 @@ INSTALLED_APPS = [
     "django.contrib.messages",
     "django.contrib.staticfiles",
     "ninja",
-    "subjects",
+    "api",
 ]
 
 MIDDLEWARE = [
@@ -124,7 +124,7 @@ STATIC_ROOT = BASE_DIR / "static"
 DEFAULT_AUTO_FIELD = "django.db.models.BigAutoField"
 
 
-DEFAULT_FILE_STORAGE = "subjects.backends.GitHubStorage"
+DEFAULT_FILE_STORAGE = "api.backends.GitHubStorage"
 
 GITHUB_HANDLE = "arunim-io"
 ACCESS_TOKEN = config("GITHUB_ACCESS_TOKEN")

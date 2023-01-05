@@ -7,12 +7,6 @@ from django.conf import settings
 from .models import Paper, Session, Subject
 
 
-class SessionSchema(ModelSchema):
-    class Config:
-        model = Session
-        model_fields = "__all__"
-
-
 class PaperSchema(ModelSchema):
     subject: str
     curriculum: str
@@ -49,6 +43,18 @@ class PaperSchema(ModelSchema):
     @staticmethod
     def resolve_ms_url(obj: Paper) -> str:
         return obj.mark_scheme.url
+
+
+class SessionSchema(ModelSchema):
+    papers: List[PaperSchema]
+
+    class Config:
+        model = Session
+        model_fields = "__all__"
+
+    @staticmethod
+    def resolve_papers(obj: Session):
+        return Paper.objects.filter(session__id=obj.id)
 
 
 class SubjectSchema(ModelSchema):
