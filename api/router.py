@@ -10,7 +10,7 @@ from .schemas import PaperSchema, SessionSchema, SubjectSchema
 router = Router()
 
 
-@router.get("/subjects/", response=List[SubjectSchema])
+@router.get("/subjects", response=List[SubjectSchema])
 def get_subjects(_, query: str = ""):
     """Get a list of subjects"""
 
@@ -21,7 +21,7 @@ def get_subjects(_, query: str = ""):
     )
 
 
-@router.get("/subjects/{subject_id}/", response=SubjectSchema)
+@router.get("/subjects/{subject_id}", response=SubjectSchema)
 def get_subject(_, subject_id: int, curriculum="", qualification="", query=""):
     """Get a subject by id"""
 
@@ -154,23 +154,3 @@ def get_subject(_, subject_id: int, curriculum="", qualification="", query=""):
             Subject, id=subject_id, qualifications__name=qualification
         )
     )
-
-
-@router.get("/sessions/", response=List[SessionSchema])
-def get_sessions(_):
-    return Session.objects.all()
-
-
-@router.get("/sessions/{session_id}", response=SessionSchema)
-def get_session(_, session_id: int):
-    return Session.objects.get(id=session_id)
-
-
-@router.get("/papers/", response=List[PaperSchema])
-def get_papers(_):
-    return Paper.objects.all()
-
-
-@router.get("/papers/{paper_id}", response=PaperSchema)
-def get_paper(_, paper_id: int):
-    return Paper.objects.get(id=paper_id)
