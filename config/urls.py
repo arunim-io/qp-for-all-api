@@ -13,12 +13,22 @@ Including another URLconf
     1. Import the include() function: from django.urls import include, path
     2. Add a URL to urlpatterns:  path('blog/', include('blog.urls'))
 """
+from ninja import NinjaAPI
+
+from api.router import router as subjects_router
 from django.conf import settings
 from django.conf.urls.static import static
 from django.contrib import admin
 from django.urls import path
 
-from .api import api
+api = NinjaAPI(
+    csrf=True,
+    title="QP for All API",
+    version="1.0.0",
+    description="The official API of QP for All",
+)
+
+api.add_router("/", subjects_router)
 
 urlpatterns = [
     path("admin/", admin.site.urls),
